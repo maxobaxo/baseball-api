@@ -1,9 +1,11 @@
 {
   "teams": [
     {
-      "id": 100,
-      "title": "dodgers",
-      "city": "los angeles"
+      "title": "cardinals",
+      "city": "st. louis",
+      "id": "039b6e85-0691-4b2f-acdd-756c1f6b87e6",
+      "createdAt": "6/17/2022, 3:25:27 AM",
+      "updatedAt": "6/17/2022, 3:25:27 AM"
     }
   ]
 }

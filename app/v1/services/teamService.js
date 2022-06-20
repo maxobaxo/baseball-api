@@ -1,3 +1,4 @@
+const { v4: uuid } = require("uuid");
 const Team = require("../database/Team");
 
 const getAllTeams = () => {
@@ -9,8 +10,21 @@ const getTeam = () => {
   return;
 };
 
-const createTeam = () => {
-  return;
+const createTeam = (newTeam) => {
+  const teamToInsert = {
+    ...newTeam,
+    id: uuid(),
+    createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+    updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+  }
+  console.log('teamToInsert', teamToInsert);
+
+  try {
+    const createdTeam = Team.createNewTeam(teamToInsert);
+    return createdTeam;
+  } catch (error) {
+    throw error
+  }
 };
 
 const updateTeam = () => {
