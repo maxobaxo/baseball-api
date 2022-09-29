@@ -1,9 +1,11 @@
 const express = require('express');
+const apicache = require('apicache');
 const teamController = require('../controllers/teamController');
 
 const router = express.Router();
+const cache = apicache.middleware;
 
-router.get('/', teamController.getAllTeams);
+router.get("/", cache("2 minutes"), teamController.getAllTeams);
 
 router.get('/:teamId', teamController.getTeam);
 

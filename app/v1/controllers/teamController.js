@@ -1,11 +1,29 @@
 const teamService = require("../services/teamService");
 
 const getAllTeams = (req, res) => {
-  const allTeams = teamService.getAllTeams();
-  res.send({ status: "ok", data: allTeams })
+  try {
+    const allTeams = teamService.getAllTeams();
+    res.status(200).send({ status: "ok", data: allTeams })
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ 
+        status: "failed", 
+        data: { error: error?.message || error}
+      })
+  }
 };
 
 const getTeam = (req, res) => {
+  const { params: teamId } = req;
+  if (!workoutId) {
+    res
+      .status(400)
+      .send({
+        status: "failed",
+        data: { error: "Parameter ':teamId' can not be empty" },
+      });
+  }
   const team = teamService.getTeam();
   res.send("Get an existing team");
 };
@@ -28,7 +46,7 @@ const createTeam = (req, res) => {
     const created = teamService.createTeam(newTeam);
     res.status(201).send({ status: "ok", data: created });
   } catch (error) {
-    throw { status: 500, message: error?.message || error}
+    throw { status: 500, message: error?.message || error }
   }
 };
 
